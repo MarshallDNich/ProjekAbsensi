@@ -1,0 +1,593 @@
+/* ============================================================
+   KELAS PAGE STYLES — Consistent with Guru/Siswa/Users Pages
+   ============================================================ */
+
+.kelas-page {
+  animation: dashFadeIn 0.4s ease-out forwards;
+}
+
+/* ===== Page Header ===== */
+.page-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.page-header-left h2 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 0.2rem 0;
+  letter-spacing: -0.02em;
+}
+
+.page-header-left p {
+  font-size: 0.825rem;
+  color: #64748b;
+  margin: 0;
+}
+
+/* ===== Search Card ===== */
+.search-card {
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.search-box {
+  position: relative;
+  width: 100%;
+}
+
+.search-box svg {
+  position: absolute;
+  left: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.6rem 0.9rem 0.6rem 2.4rem;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  color: #0f172a;
+  background: #fff;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  outline: none;
+}
+
+.search-input:focus {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+/* ===== Cards Grid ===== */
+.kelas-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.25rem;
+}
+
+.kelas-card {
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.kelas-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  border-color: #cbd5e1;
+}
+
+.kelas-card.incomplete {
+  border-left: 4px solid #f59e0b;
+}
+
+.kelas-card-body {
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Kelas Banner */
+.kelas-banner {
+  background: linear-gradient(135deg, #dc2626, #b91c1c);
+  border-radius: 12px;
+  padding: 1.25rem 1.25rem;
+  margin-bottom: 1rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.kelas-banner-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.kelas-banner-name {
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.kelas-banner-sub {
+  font-size: 0.75rem;
+  opacity: 0.85;
+}
+
+/* Tingkat Badge */
+.tingkat-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  padding: 0.3rem 0.6rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+
+/* Kelas Info List */
+.kelas-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.kelas-detail-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.kelas-detail-icon {
+  color: #dc2626;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.kelas-detail-text {
+  color: #334155;
+  line-height: 1.4;
+  flex: 1;
+}
+
+.kelas-detail-text.empty {
+  color: #94a3b8;
+  font-style: italic;
+}
+
+.kelas-wali {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+}
+
+.kelas-wali-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+  flex-shrink: 0;
+}
+
+.kelas-wali-info .kelas-wali-label {
+  font-size: 0.7rem;
+  color: #94a3b8;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.kelas-wali-info .kelas-wali-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+/* Stat Row */
+.kelas-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.kelas-stat-box {
+  background: #eff6ff;
+  border: 1px solid #dbeafe;
+  border-radius: 12px;
+  padding: 0.9rem;
+  text-align: center;
+}
+
+.kelas-stat-box .kelas-stat-value {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #1e40af;
+  line-height: 1.1;
+}
+
+.kelas-stat-box .kelas-stat-label {
+  font-size: 0.7rem;
+  color: #3b82f6;
+  font-weight: 600;
+}
+
+/* Action Buttons */
+.kelas-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: auto;
+}
+
+.btn-action {
+  flex: 1;
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  border: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.btn-detail {
+  background: #eff6ff;
+  color: #3b82f6;
+  border: 1px solid #dbeafe;
+}
+
+.btn-detail:hover {
+  background: #3b82f6;
+  color: #fff;
+  border-color: #3b82f6;
+}
+
+.btn-edit {
+  background: #fef3c7;
+  color: #f59e0b;
+  border: 1px solid #fde68a;
+}
+
+.btn-edit:hover {
+  background: #f59e0b;
+  color: #fff;
+  border-color: #f59e0b;
+}
+
+.btn-delete {
+  background: #fef2f2;
+  color: #ef4444;
+  border: 1px solid #fecaca;
+}
+
+.btn-delete:hover {
+  background: #ef4444;
+  color: #fff;
+  border-color: #ef4444;
+}
+
+/* ===== Detail Page ===== */
+.kelas-detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.kelas-detail-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.kelas-info-card {
+  background: linear-gradient(150deg, #dc2626, #991b1b);
+  border-radius: 16px;
+  padding: 2rem 1.5rem;
+  color: #fff;
+}
+
+.kelas-info-card .kelas-detail-name {
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin: 0.75rem 0 0.25rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.kelas-info-card .kelas-detail-sub {
+  font-size: 0.85rem;
+  opacity: 0.9;
+  margin: 0 0 1rem 0;
+}
+
+.kelas-info-card .kelas-detail-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  margin: 0.25rem 0.5rem 0.25rem 0;
+}
+
+/* Members Card */
+.kelas-members-card {
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.kelas-card-body {
+  padding: 1.5rem;
+}
+
+.kelas-member {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid #f1f5f9;
+  transition: background 0.15s ease;
+}
+
+.kelas-member:last-child {
+  border-bottom: none;
+}
+
+.kelas-member:hover {
+  background: #fafbfd;
+}
+
+.kelas-member-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.kelas-member-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.kelas-member-name {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #0f172a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.kelas-member-meta {
+  font-size: 0.75rem;
+  color: #64748b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.kelas-member-nisn {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #3b82f6;
+  background: #eff6ff;
+  border: 1px solid #dbeafe;
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.btn-remove-member {
+  flex-shrink: 0;
+  border: none;
+  background: #fef2f2;
+  color: #ef4444;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.btn-remove-member:hover {
+  background: #ef4444;
+  color: #fff;
+  border-color: #ef4444;
+}
+
+.btn-move-member {
+  flex-shrink: 0;
+  border: 1px solid #dbeafe;
+  background: #eff6ff;
+  color: #3b82f6;
+  border-radius: 10px;
+  padding: 0.5rem 0.9rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.btn-move-member:hover {
+  background: #3b82f6;
+  color: #fff;
+  border-color: #3b82f6;
+}
+
+/* Add Member Panel */
+.add-member-panel {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.add-member-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.add-member-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.add-member-row select {
+  flex: 1;
+  min-width: 220px;
+  padding: 0.6rem 0.9rem;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-family: inherit;
+  color: #0f172a;
+  background: #fff;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.add-member-row select:focus {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1);
+}
+
+/* Empty members */
+.kelas-members-empty {
+  text-align: center;
+  padding: 2.5rem 1rem;
+  color: #94a3b8;
+}
+
+.kelas-members-empty svg {
+  margin-bottom: 0.75rem;
+  opacity: 0.4;
+}
+
+.kelas-members-empty p {
+  font-size: 0.85rem;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* Loading / Empty / Error states reuse guru.css spinner etc */
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .kelas-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .kelas-detail-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-header-bar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .kelas-actions {
+    flex-direction: column;
+  }
+
+  .btn-action,
+  .btn-remove-member,
+  .btn-move-member {
+    width: 100%;
+  }
+
+  .add-member-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .add-member-row select {
+    min-width: 0;
+  }
+}

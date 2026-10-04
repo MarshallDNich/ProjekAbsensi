@@ -1,0 +1,25 @@
+/* ============================================================
+   SISWA PAGE STYLES — Reuse Guru.css classes
+   ============================================================ */
+
+.siswa-page {
+  animation: dashFadeIn 0.4s ease-out forwards;
+}
+
+.siswa-avatar-placeholder {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  margin: 0 auto;
+}
+
+.siswa-actions {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: auto;
+}

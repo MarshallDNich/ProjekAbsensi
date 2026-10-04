@@ -1,0 +1,13 @@
+.git
+.gitignore
+venv/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.log
+.env
+.env.example
+*.task
+README.md
+smoke_stub.py

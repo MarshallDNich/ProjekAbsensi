@@ -1,0 +1,108 @@
+version: '3.8'
+
+services:
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: absensi-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-root_password_change_me}
+      MYSQL_DATABASE: ${DB_DATABASE:-projek_absensi}
+      MYSQL_USER: ${DB_USERNAME:-absensi_user}
+      MYSQL_PASSWORD: ${DB_PASSWORD:-absensi_password_change_me}
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - absensi-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Laravel Backend
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: absensi-backend
+    restart: unless-stopped
+    working_dir: /var/www/html
+    volumes:
+      - ./backend:/var/www/html
+      - backend_storage:/var/www/html/storage/app
+    environment:
+      - APP_ENV=production
+      - APP_DEBUG=false
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - DB_DATABASE=${DB_DATABASE:-projek_absensi}
+      - DB_USERNAME=${DB_USERNAME:-absensi_user}
+      - DB_PASSWORD=${DB_PASSWORD:-absensi_password_change_me}
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - absensi-network
+
+  # Nginx for Laravel
+  nginx:
+    image: nginx:alpine
+    container_name: absensi-nginx
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    volumes:
+      - ./backend:/var/www/html
+      - ./nginx/backend.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - backend
+    networks:
+      - absensi-network
+
+  # Python Face Recognition Service
+  face-service:
+    build:
+      context: ./face-service
+      dockerfile: Dockerfile
+    container_name: absensi-face-service
+    restart: unless-stopped
+    ports:
+      - "8001:8001"
+    environment:
+      - FACE_SERVICE_HOST=0.0.0.0
+      - FACE_SERVICE_PORT=8001
+      - MATCH_THRESHOLD=0.5
+    networks:
+      - absensi-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Frontend React (served as static files)
+  frontend:
+    image: nginx:alpine
+    container_name: absensi-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    volumes:
+      - ./frontend/dist:/usr/share/nginx/html
+      - ./nginx/frontend.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - absensi-network
+
+networks:
+  absensi-network:
+    driver: bridge
+
+volumes:
+  mysql_data:
+    driver: local
+  backend_storage:
+    driver: local

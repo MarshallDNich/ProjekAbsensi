@@ -1,0 +1,35 @@
+name: Daily Backup
+
+on:
+  schedule:
+    # Run at 2:00 AM UTC every day
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+jobs:
+  backup:
+    name: Create Daily Backup
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Run Backup Script
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd ~/ProjekAbsensi
+            ./scripts/backup.sh daily-backup-$(date +%Y%m%d)
+
+      - name: Upload Backup to Cloud
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_IP }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            # Upload to Google Drive using rclone
+            if command -v rclone &> /dev/null; then
+              rclone copy ~/backups/ gdrive:AbsensiBackups/ --include "*.gz" --include "*.tar.gz"
+            fi
