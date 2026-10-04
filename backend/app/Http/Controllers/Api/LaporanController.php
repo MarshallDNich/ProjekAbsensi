@@ -25,22 +25,27 @@ class LaporanController extends BaseApiController
                 'absensis as count_hadir' => function ($q) use ($bulan, $tahun) {
                     $q->whereMonth('tanggal', $bulan)
                       ->whereYear('tanggal', $tahun)
-                      ->where('status', 'Hadir');
+                      ->where('status', 'hadir');
+                },
+                'absensis as count_terlambat' => function ($q) use ($bulan, $tahun) {
+                    $q->whereMonth('tanggal', $bulan)
+                      ->whereYear('tanggal', $tahun)
+                      ->where('status', 'terlambat');
                 },
                 'absensis as count_sakit' => function ($q) use ($bulan, $tahun) {
                     $q->whereMonth('tanggal', $bulan)
                       ->whereYear('tanggal', $tahun)
-                      ->where('status', 'Sakit');
+                      ->where('status', 'sakit');
                 },
                 'absensis as count_izin' => function ($q) use ($bulan, $tahun) {
                     $q->whereMonth('tanggal', $bulan)
                       ->whereYear('tanggal', $tahun)
-                      ->where('status', 'Izin');
+                      ->where('status', 'izin');
                 },
                 'absensis as count_alpa' => function ($q) use ($bulan, $tahun) {
                     $q->whereMonth('tanggal', $bulan)
                       ->whereYear('tanggal', $tahun)
-                      ->where('status', 'Alpa');
+                      ->where('status', 'alpa');
                 },
             ]);
 
@@ -50,13 +55,14 @@ class LaporanController extends BaseApiController
 
         $rekapSiswa = $query->get()->map(function ($siswa) {
             $totalHadir = $siswa->count_hadir;
+            $totalTerlambat = $siswa->count_terlambat;
             $totalSakit = $siswa->count_sakit;
             $totalIzin = $siswa->count_izin;
             $totalAlpa = $siswa->count_alpa;
-            $totalPertemuan = $totalHadir + $totalSakit + $totalIzin + $totalAlpa;
+            $totalPertemuan = $totalHadir + $totalTerlambat + $totalSakit + $totalIzin + $totalAlpa;
 
-            $persentase = $totalPertemuan > 0 
-                ? round(($totalHadir / $totalPertemuan) * 100, 1) 
+            $persentase = $totalPertemuan > 0
+                ? round((($totalHadir + $totalTerlambat) / $totalPertemuan) * 100, 1)
                 : 0;
 
             return [
@@ -65,6 +71,7 @@ class LaporanController extends BaseApiController
                 'nama' => $siswa->user ? $siswa->user->nama : '-',
                 'kelas' => $siswa->kelas ? $siswa->kelas->nama_kelas : '-',
                 'hadir' => $totalHadir,
+                'terlambat' => $totalTerlambat,
                 'sakit' => $totalSakit,
                 'izin' => $totalIzin,
                 'alpa' => $totalAlpa,

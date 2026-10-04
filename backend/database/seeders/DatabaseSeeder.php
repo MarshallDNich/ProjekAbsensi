@@ -27,6 +27,9 @@ class DatabaseSeeder extends Seeder
 
             AuditLogSeeder::class,
 
+            // Dummy jadwal pelajaran lengkap
+            DummyJadwalSeeder::class,
+
         ]);
     }
 }

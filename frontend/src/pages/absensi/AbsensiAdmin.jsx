@@ -29,20 +29,29 @@ function todayStr() {
 }
 
 const STATUS_MAP = {
-    Hadir: "badge-hadir",
-    Terlambat: "badge-terlambat",
-    Izin: "badge-izin",
-    Sakit: "badge-sakit",
-    Alpha: "badge-alpha",
+    hadir: "badge-hadir",
+    terlambat: "badge-terlambat",
+    izin: "badge-izin",
+    sakit: "badge-sakit",
+    alpa: "badge-alpha",
+};
+
+const STATUS_LABEL = {
+    hadir: "Hadir",
+    terlambat: "Terlambat",
+    izin: "Izin",
+    sakit: "Sakit",
+    alpa: "Alpha",
 };
 
 function StatusBadge({ status }) {
+    const key = (status || "").toLowerCase();
     return (
-        <span className={`absen-badge ${STATUS_MAP[status] || "badge-secondary"}`}>
-            {status === "Hadir" && <CheckCircle2 size={12} />}
-            {status === "Terlambat" && <Clock size={12} />}
-            {status === "Izin" && <Sparkles size={12} />}
-            {status}
+        <span className={`absen-badge ${STATUS_MAP[key] || "badge-secondary"}`}>
+            {key === "hadir" && <CheckCircle2 size={12} />}
+            {key === "terlambat" && <Clock size={12} />}
+            {key === "izin" && <Sparkles size={12} />}
+            {STATUS_LABEL[key] || status}
         </span>
     );
 }
@@ -178,11 +187,15 @@ function AbsensiAdmin() {
     };
 
     // Calculate quick metrics for current view
-    const hadirCount = data.filter((d) => d.status === "Hadir").length;
-    const terlambatCount = data.filter((d) => d.status === "Terlambat").length;
-    const izinSakitCount = data.filter(
-        (d) => d.status === "Izin" || d.status === "Sakit"
-    ).length;
+    const hadirCount = data.filter((d) => {
+        const s = (d.status || "").toLowerCase();
+        return s === "hadir" || s === "terlambat";
+    }).length;
+    const terlambatCount = data.filter((d) => (d.status || "").toLowerCase() === "terlambat").length;
+    const izinSakitCount = data.filter((d) => {
+        const s = (d.status || "").toLowerCase();
+        return s === "izin" || s === "sakit";
+    }).length;
 
     const currentKelasObj = kelas.find((k) => String(k.id) === String(kelasId));
 
@@ -370,11 +383,11 @@ function AbsensiAdmin() {
                 <div className="status-tabs-row">
                     {[
                         { val: "", label: "Semua Status" },
-                        { val: "Hadir", label: "Hadir" },
-                        { val: "Terlambat", label: "Terlambat" },
-                        { val: "Izin", label: "Izin" },
-                        { val: "Sakit", label: "Sakit" },
-                        { val: "Alpha", label: "Alpha" },
+                        { val: "hadir", label: "Hadir" },
+                        { val: "terlambat", label: "Terlambat" },
+                        { val: "izin", label: "Izin" },
+                        { val: "sakit", label: "Sakit" },
+                        { val: "alpa", label: "Alpha" },
                     ].map((tab) => (
                         <button
                             key={tab.val}

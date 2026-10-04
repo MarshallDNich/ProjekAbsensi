@@ -263,11 +263,11 @@ function AbsensiAmbil() {
                             }
                         </p>
                         <span class="absen-badge ${
-                            saved.status === "Terlambat"
+                            (saved.status || "").toLowerCase() === "terlambat"
                                 ? "badge-terlambat"
                                 : "badge-hadir"
                         }" style="font-size: 14px; padding: 6px 16px;">
-                            ${saved.status.toUpperCase()}
+                            ${saved.status ? saved.status.charAt(0).toUpperCase() + saved.status.slice(1) : "-"}
                         </span>
                         <p style="margin-top: 10px; font-size: 13px; color: #64748b;">
                             Waktu masuk: <b>${saved.jam_masuk || "-"} WIB</b>
@@ -434,20 +434,20 @@ function AbsensiAmbil() {
                 <div className="digital-pass-card">
                     <div
                         className={`pass-header-ribbon ${
-                            sudahAbsen.status === "Terlambat"
+                            (sudahAbsen.status || "").toLowerCase() === "terlambat"
                                 ? "status-terlambat"
                                 : "status-hadir"
                         }`}
                     >
                         <div className="pass-ribbon-icon">
-                            {sudahAbsen.status === "Terlambat" ? (
+                            {(sudahAbsen.status || "").toLowerCase() === "terlambat" ? (
                                 <Clock size={36} />
                             ) : (
                                 <ShieldCheck size={36} />
                             )}
                         </div>
                         <h2 className="pass-title">
-                            {sudahAbsen.status === "Terlambat"
+                            {(sudahAbsen.status || "").toLowerCase() === "terlambat"
                                 ? "Presensi Terlambat"
                                 : "Presensi Berhasil!"}
                         </h2>
@@ -489,13 +489,13 @@ function AbsensiAmbil() {
                                 <div>
                                     <span
                                         className={`absen-badge ${
-                                            sudahAbsen.status === "Terlambat"
+                                            (sudahAbsen.status || "").toLowerCase() === "terlambat"
                                                 ? "badge-terlambat"
                                                 : "badge-hadir"
                                         }`}
                                     >
                                         <Sparkles size={12} />
-                                        {sudahAbsen.status}
+                                        {sudahAbsen.status ? sudahAbsen.status.charAt(0).toUpperCase() + sudahAbsen.status.slice(1) : "-"}
                                     </span>
                                 </div>
                             </div>

@@ -16,6 +16,7 @@ import PengajuanVerifikasi from "../pages/pengajuan-izin/PengajuanVerifikasi";
 import JadwalAdmin from "../pages/jadwal/JadwalAdmin";
 import JadwalReadonly from "../pages/jadwal/JadwalReadonly";
 import JamPelajaranAdmin from "../pages/jadwal/JamPelajaranAdmin";
+import Laporan from "../pages/laporan/Laporan";
 import { useAuth } from "../context/AuthContext";
 
 function JadwalPage() {
@@ -75,7 +76,7 @@ function AppRoutes() {
                     <Route path="/pengajuan-izin/verifikasi" element={<PengajuanVerifikasi />} />
                     <Route path="/jadwal" element={<JadwalPage />} />
                     <Route path="/jadwal/jam-pelajaran" element={<JamPelajaranAdmin />} />
-                    <Route path="/laporan" element={<div className="p-4"><h2>Laporan</h2></div>} />
+                    <Route path="/laporan" element={<Laporan />} />
                 </Route>
 
                 {/* Catch-all: redirect ke login */}

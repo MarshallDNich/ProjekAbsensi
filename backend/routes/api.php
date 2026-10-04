@@ -45,6 +45,11 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::apiResource('siswa', SiswaController::class);
     });
 
+    // Dashboard Siswa
+    Route::middleware('role:Siswa')->group(function () {
+        Route::get('/dashboard/siswa-stats', [DashboardController::class, 'siswaStats']);
+    });
+
     // Laporan Rekap Route (Admin & Guru)
     Route::middleware('role:Admin,Guru')->group(function () {
         Route::get('/laporan/rekap', [LaporanController::class, 'rekap']);

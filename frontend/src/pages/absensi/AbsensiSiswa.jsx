@@ -33,22 +33,31 @@ function todayStr() {
 }
 
 const STATUS_MAP = {
-    Hadir: "badge-hadir",
-    Terlambat: "badge-terlambat",
-    Izin: "badge-izin",
-    Sakit: "badge-sakit",
-    Alpha: "badge-alpha",
+    hadir: "badge-hadir",
+    terlambat: "badge-terlambat",
+    izin: "badge-izin",
+    sakit: "badge-sakit",
+    alpa: "badge-alpha",
+};
+
+const STATUS_LABEL = {
+    hadir: "Hadir",
+    terlambat: "Terlambat",
+    izin: "Izin",
+    sakit: "Sakit",
+    alpa: "Alpha",
 };
 
 const LABEL_JENIS = { izin: "Izin", sakit: "Sakit", dispensasi: "Dispensasi" };
 
 function StatusBadge({ status }) {
+    const key = (status || "").toLowerCase();
     return (
-        <span className={`absen-badge ${STATUS_MAP[status] || "badge-secondary"}`}>
-            {status === "Hadir" && <CheckCircle2 size={12} />}
-            {status === "Terlambat" && <Clock size={12} />}
-            {status === "Izin" && <Sparkles size={12} />}
-            {status}
+        <span className={`absen-badge ${STATUS_MAP[key] || "badge-secondary"}`}>
+            {key === "hadir" && <CheckCircle2 size={12} />}
+            {key === "terlambat" && <Clock size={12} />}
+            {key === "izin" && <Sparkles size={12} />}
+            {STATUS_LABEL[key] || status}
         </span>
     );
 }
@@ -167,9 +176,12 @@ function AbsensiSiswa() {
 
     // ====== Stats ======
     const totalRecords = data.length;
-    const hadirCount = data.filter((d) => d.status === "Hadir").length;
-    const terlambatCount = data.filter((d) => d.status === "Terlambat").length;
-    const izinSakitCount = data.filter((d) => d.status === "Izin" || d.status === "Sakit").length;
+    const hadirCount = data.filter((d) => (d.status || "").toLowerCase() === "hadir" || (d.status || "").toLowerCase() === "terlambat").length;
+    const terlambatCount = data.filter((d) => (d.status || "").toLowerCase() === "terlambat").length;
+    const izinSakitCount = data.filter((d) => {
+        const s = (d.status || "").toLowerCase();
+        return s === "izin" || s === "sakit";
+    }).length;
     const filteredData = selectedMonth ? data.filter((d) => d.tanggal?.startsWith(selectedMonth)) : data;
 
     return (
@@ -214,15 +226,15 @@ function AbsensiSiswa() {
             {/* ======== Attendance Status Banner ======== */}
             {sudahAbsenHariIni && todayAbsenData && activeTab === "riwayat" && (
                 <div style={{
-                    background: todayAbsenData.status === "Terlambat" ? "#fff7ed" : "#ecfdf5",
-                    border: `1.5px solid ${todayAbsenData.status === "Terlambat" ? "#fed7aa" : "#a7f3d0"}`,
+                    background: (todayAbsenData.status || "").toLowerCase() === "terlambat" ? "#fff7ed" : "#ecfdf5",
+                    border: `1.5px solid ${(todayAbsenData.status || "").toLowerCase() === "terlambat" ? "#fed7aa" : "#a7f3d0"}`,
                     borderRadius: "16px", padding: "1rem 1.25rem", marginBottom: "1.5rem",
                     display: "flex", alignItems: "center", gap: "0.75rem",
                 }}>
                     <div style={{
                         width: "40px", height: "40px", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center",
-                        background: todayAbsenData.status === "Terlambat" ? "#ffedd5" : "#d1fae5",
-                        color: todayAbsenData.status === "Terlambat" ? "#ea580c" : "#059669",
+                        background: (todayAbsenData.status || "").toLowerCase() === "terlambat" ? "#ffedd5" : "#d1fae5",
+                        color: (todayAbsenData.status || "").toLowerCase() === "terlambat" ? "#ea580c" : "#059669",
                     }}>
                         <CalendarCheck size={20} />
                     </div>
